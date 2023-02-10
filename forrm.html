@@ -1,0 +1,61 @@
+<html>
+    <head>
+
+</head>
+<body>
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+      
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      
+        <input type="submit" value="Submit" id="submit-button">
+    </form>
+      
+</body>
+<script>
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (!checkPassword(password)) {
+    alert("Password is not valid");
+    return;
+  }
+
+  if (username.length === 0) {
+    alert("Username cannot be empty");
+    return;
+  }
+
+  alert("Form submitted successfully");
+});
+
+function checkPassword(passwords) {
+  let validPasswords = [];
+  let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@])[A-Za-z\d$#@]{6,12}$/;
+  let passwordArray = passwords.split(',');
+
+  for (let i = 0; i < passwordArray.length; i++) {
+    let password = passwordArray[i];
+    if (regex.test(password)) {
+      validPasswords.push(password);
+    }
+  }
+
+  return validPasswords.join(',');
+}
+
+let passwords = "ABd1234@1,a F1#,2w3E*,2We3345";
+console.log(checkPassword(passwords));
+
+document.getElementById("submit-button").addEventListener("click", function() {
+  this.style.backgroundColor = "red";
+  this.innerHTML = "Submitting...";
+});
+
+</script>
+  </form></html>
